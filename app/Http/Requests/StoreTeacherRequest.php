@@ -4,14 +4,14 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StorageCourseVideoRequest extends FormRequest
+class StoreTeacherRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return $this->user()->hasAnyRole(['owner', 'teacher']);
+        return $this->user()->hasAnyRole(['owner']);
     }
 
     /**
@@ -22,8 +22,7 @@ class StorageCourseVideoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:255'],
-            'path_video' => ['required', 'string', 'max:255']
+            'email' => ['required', 'string', 'max:255'],
         ];
     }
 }

@@ -39,7 +39,7 @@
                     </div>
                 </div>
                 @empty
-                <p>Tidak ada kategori yang ditampilkan...</p>
+                <p class="text-white">Tidak ada kategori yang ditampilkan...</p>
                 @endforelse
             </div>
         </div>

@@ -4,14 +4,14 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StorageCategoryRequest extends FormRequest
+class StoreCourseRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return $this->user()->hasAnyRole(['owner']);
+        return $this->user()->hasAnyRole(['owner', 'teacher']);
     }
 
     /**
@@ -23,7 +23,11 @@ class StorageCategoryRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:255'],
-            'icon' => ['required', 'image', 'mimes:png, jpg, jpeg']
+            'path_trailer' => ['required', 'string', 'max:255'],
+            'about' => ['required', 'string'],
+            'thumbnail' => ['required', 'image', 'mimes:png, jpg, jpeg'],
+            'category_id' => ['required', 'integer'],
+            'course_keypoints.*' => ['required', 'string', 'max:255']
         ];
     }
 }

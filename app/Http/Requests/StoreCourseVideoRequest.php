@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StorageCourseRequest extends FormRequest
+class StoreCourseVideoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,11 +23,7 @@ class StorageCourseRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:255'],
-            'path_trailer' => 'required' | 'string' | 'max:255',
-            'about' => 'required' | 'string',
-            'thumbnail' => 'required' | 'image' | 'mimes:png, jpg, jpeg',
-            'category_id' => 'required' | 'integer',
-            'course_keypoints.*' => 'required' | 'string' | 'max:255'
+            'path_video' => ['required', 'string', 'max:255']
         ];
     }
 }

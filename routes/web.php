@@ -6,7 +6,7 @@ use App\Http\Controllers\CourseVideoController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SubscribeTransactionController;
-use App\Http\Controllers\TheacerController;
+use App\Http\Controllers\TeacherController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -46,10 +46,10 @@ Route::middleware('auth')->group(function () {
     Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('categories', CategoryController::class)
             ->middleware('role:owner');
-        Route::resource('teachers', TheacerController::class)
-            ->middleware('role:owner|teacher');
-        Route::resource('courses', CourseController::class)
+        Route::resource('teachers', TeacherController::class)
             ->middleware('role:owner');
+        Route::resource('courses', CourseController::class)
+            ->middleware('role:owner|teacher');
         Route::resource('subscribe_transactions', SubscribeTransactionController::class)
             ->middleware('role:owner');
 

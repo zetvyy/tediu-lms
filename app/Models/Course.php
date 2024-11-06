@@ -16,7 +16,7 @@ class Course extends Model
         'path_trailer',
         'about',
         'thumbnail',
-        'theacer_id',
+        'teacher_id',
         'category_id',
     ];
 
@@ -27,7 +27,7 @@ class Course extends Model
 
     public function teacher()
     {
-        return $this->belongsTo(Theacer::class);
+        return $this->belongsTo(Teacher::class);
     }
 
     public function course_videos()
@@ -42,6 +42,6 @@ class Course extends Model
 
     public function students()
     {
-        return $this->belongsToMany(User::class, 'course_student');
+        return $this->belongsToMany(User::class, 'course_students');
     }
 }

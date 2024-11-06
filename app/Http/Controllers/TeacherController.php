@@ -2,22 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StorageTeacherRequest;
-use App\Models\Theacer;
+use App\Http\Requests\StoreTeacherRequest;
+use App\Models\Teacher;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 
-class TheacerController extends Controller
+class TeacherController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $teachers = Theacer::orderBy('id', 'desc')->get();
+        $teachers = Teacher::orderBy('id', 'desc')->get();
 
         return view('admin.teachers.index', [
             'teachers' => $teachers
@@ -35,7 +35,7 @@ class TheacerController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StorageTeacherRequest $request)
+    public function store(StoreTeacherRequest $request)
     {
         $validated = $request->validated();
 
@@ -58,22 +58,21 @@ class TheacerController extends Controller
             $validated['user_id'] = $user->id;
             $validated['is_active'] = true;
 
-            Theacer::create($validated);
+            Teacher::create($validated);
 
             if ($user->hasRole('student')) {
                 $user->removeRole('student');
             }
             $user->assignRole('teacher');
+            return view('admin.teachers.index');
         });
-
-
         return view('admin.teachers.index');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Theacer $theacer)
+    public function show(Teacher $teacher)
     {
         //
     }
@@ -81,7 +80,7 @@ class TheacerController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Theacer $theacer)
+    public function edit(Teacher $teacher)
     {
         //
     }
@@ -89,7 +88,7 @@ class TheacerController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Theacer $theacer)
+    public function update(Request $request, Teacher $teacher)
     {
         //
     }
@@ -97,14 +96,14 @@ class TheacerController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Theacer $theacer)
+    public function destroy(Teacher $teacher)
     {
         DB::beginTransaction();
         try {
-            $theacer->delete();
+            $teacher->delete();
             DB::commit();
 
-            $user = User::find($theacer->user_id);
+            $user = User::find($teacher->user_id);
 
             $user->removeRole('teacher');
             $user->assignRole('student');

@@ -23,11 +23,11 @@ class UpdateCourseRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:255'],
-            'path_trailer' => 'required' | 'string' | 'max:255',
-            'about' => 'required' | 'string',
-            'thumbnail' => 'required' | 'image' | 'mimes:png, jpg, jpeg',
-            'category_id' => 'required' | 'integer',
-            'course_keypoints.*' => 'sometimes' | 'string' | 'max:255'
+            'path_trailer' => ['required', 'string', 'max:255'],
+            'about' => ['required', 'string'],
+            'thumbnail' => ['sometimes', 'image', 'mimes:png, jpg, jpeg'],
+            'category_id' => ['required', 'integer'],
+            'course_keypoints.*' => ['required', 'string', 'max:255']
         ];
     }
 }

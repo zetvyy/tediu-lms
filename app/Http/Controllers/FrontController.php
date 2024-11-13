@@ -10,12 +10,15 @@ class FrontController extends Controller
 {
     public function index()
     {
-        return view('front.index');
+        $categories = Category::get();
+        $courses = Course::with(['category', 'teacher', 'students'])->orderByDesc('id')->get();
+
+        return view('front.index', compact('categories', 'courses'));
     }
 
     public function details(Course $course)
     {
-        return view('front.details');
+        return view('front.details', compact('course'));
     }
 
     public function category(Category $category)

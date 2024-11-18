@@ -16,15 +16,15 @@
 <body class="text-black font-poppins pt-10 pb-[50px]">
     <div id="hero-section" class="max-w-[1200px] mx-auto w-full h-[393px] flex flex-col gap-10 pb-[50px] bg-[url('assets/background/Hero-Banner.png')] bg-center bg-no-repeat bg-cover rounded-[32px] overflow-hidden absolute transform -translate-x-1/2 left-1/2">
         <nav class="flex justify-between items-center pt-6 px-[50px]">
-            <a href="/">
+            <a href="{{route('front.index')}}">
                 <img src={{asset("assets/logo/tediu-putih.png")}} alt="logo" class="w-[150px]">
             </a>
             <ul class="flex items-center gap-[30px] text-white">
                 <li>
-                    <a href="/" class="font-semibold">Home</a>
+                    <a href="{{route('front.index')}}" class="font-semibold">Home</a>
                 </li>
                 <li>
-                    <a href="pricing.html" class="font-semibold">About</a>
+                    <a href="{{route('front.pricing')}}" class="font-semibold">About</a>
                 </li>
                 <li>
                     <a href="" class="font-semibold">Webinar</a>

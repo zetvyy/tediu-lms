@@ -24,7 +24,7 @@
                     <a href="{{route('front.index')}}" class="font-semibold">Home</a>
                 </li>
                 <li>
-                    <a href="pricing.html" class="font-semibold">About</a>
+                    <a href="{{route('front.pricing')}}" class="font-semibold">About</a>
                 </li>
                 <li>
                     <a href="" class="font-semibold">Webinar</a>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Course;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FrontController extends Controller
 {
@@ -24,6 +25,21 @@ class FrontController extends Controller
     public function category(Category $category)
     {
         return view('front.category');
+    }
+
+    public function learning(Course $course, $courseVideoId)
+    {
+        $user = Auth::user();
+
+        if (!$user->hasActiveSubscription()) {
+            return redirect()->route('front.pricing');
+        }
+
+        $video = $course->course_videos->firstWhere('id', $courseVideoId);
+
+        $user->courses()->syncWithoutDetaching($course->id);
+
+        return view('front.learning', compact('course', 'video'));
     }
 
     public function pricing()

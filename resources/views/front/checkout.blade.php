@@ -97,7 +97,8 @@
                 </div>
                 <p class="font-semibold text-[28px] leading-[42px]">Rp 429000</p>
             </div>
-            <form class="w-full flex flex-col bg-white rounded-2xl p-5 gap-5">
+            <form method="POST" enctype="multipart/form-data" action="{{route('front.checkout_store')}}" class="w-full flex flex-col bg-white rounded-2xl p-5 gap-5">
+                @csrf
                 <p class="font-bold text-lg">Send Payment</p>
                 <div class="flex flex-col gap-5">
                     <div class="flex items-center justify-between">
@@ -150,7 +151,7 @@
                         </div>
                         <p id="fileLabel">Add a file attachment</p>
                     </button>
-                    <input id="file" type="file" name="file" class="hidden" onchange="updateFileName(this)">
+                    <input id="file" type="file" name="proof" class="hidden" onchange="updateFileName(this)">
                 </div>
                 <button class="p-[20px_32px] bg-[#4B7BFF] text-white rounded-full text-center font-semibold transition-all duration-300 hover:shadow-[0_10px_20px_0_#4B7BFF80]">I've Made The Payment</button>
             </form>

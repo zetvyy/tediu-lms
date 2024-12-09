@@ -58,7 +58,7 @@ class SubscribeTransactionController extends Controller
         DB::transaction(function () use ($subscribeTransaction) {
             $subscribeTransaction->update([
                 'is_paid' => true,
-                'subscribe_start_date' => Carbon::now(),
+                'subscription_start_date' => Carbon::now(),
             ]);
         });
         return redirect()->route('admin.subscribe_transactions.show', $subscribeTransaction);

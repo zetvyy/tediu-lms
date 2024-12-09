@@ -22,7 +22,7 @@ class StoreSubscribeTransactionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'proof' => ['required', 'image', 'mimes:png, jpg, jpeg']
+            'proof' => ['required', 'image', 'file']
         ];
     }
 }

@@ -46,7 +46,7 @@
                         </div>
                     </div>
                     <div>
-                        <img src="{{Storage::url('proof/buktibayar.png')}}" alt="bukti bayar">
+                        <img src="{{Storage::url($subscribeTransaction->proof)}}" alt="bukti bayar">
                     </div>
                 </div>
                 <hr class="my-5">

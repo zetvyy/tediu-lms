@@ -156,6 +156,16 @@
                 <button class="p-[20px_32px] bg-[#4B7BFF] text-white rounded-full text-center font-semibold transition-all duration-300 hover:shadow-[0_10px_20px_0_#4B7BFF80]">I've Made The Payment</button>
             </form>
         </div>
+
+        @if ($errors->any())
+          <div class="gradient-badge w-fit p-[8px_16px] rounded-full border border-[#4B7BFF] flex items-center gap-[6px]">
+            <ul>
+              @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+              @endforeach
+            </ul>
+          </div>
+        @endif
         
     </div>
     

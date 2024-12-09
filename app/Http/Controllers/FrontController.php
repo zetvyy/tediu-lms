@@ -28,7 +28,8 @@ class FrontController extends Controller
 
     public function category(Category $category)
     {
-        return view('front.category');
+        $courses = $category->courses()->get();
+        return view('front.category', compact('courses'));
     }
 
     public function learning(Course $course, $courseVideoId)
@@ -48,11 +49,21 @@ class FrontController extends Controller
 
     public function pricing()
     {
+        $user = Auth::user();
+
+        if ($user->hasActiveSubscription()) {
+            return redirect()->route('front.index');
+        }
         return view('front.pricing');
     }
 
     public function checkout()
     {
+        $user = Auth::user();
+
+        if ($user->hasActiveSubscription()) {
+            return redirect()->route('front.index');
+        }
         return view('front.checkout');
     }
 
@@ -64,21 +75,25 @@ class FrontController extends Controller
             return redirect()->route('front.index');
         }
 
-        DB::transaction(function () use ($request, $user) {
-            $validated = $request->validated();
+        try {
+            DB::transaction(function () use ($request, $user) {
+                $validated = $request->validated();
 
-            if ($request->hasFile('proof')) {
-                $proofPath = $request->file('proof')->store('proofs', 'public');
-                $validated['proof'] = $proofPath;
-            }
+                if ($request->hasFile('proof')) {
+                    $proofPath = $request->file('proof')->store('proofs', 'public');
+                    $validated['proof'] = $proofPath;
+                }
 
-            $validated['user_id'] = $user->id;
-            $validated['total_amount'] = 490000;
-            $validated['is_paid'] = false;
+                $validated['user_id'] = $user->id;
+                $validated['total_amount'] = 490000;
+                $validated['is_paid'] = false;
 
-            $transaction = SubscribeTransaction::create($validated);
-        });
+                SubscribeTransaction::create($validated);
+            });
 
-        return redirect()->route('dashboard');
+            return redirect()->route('dashboard')->with('success', 'Checkout berhasil disimpan!');
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['error' => 'Terjadi kesalahan: ' . $e->getMessage()]);
+        }
     }
 }

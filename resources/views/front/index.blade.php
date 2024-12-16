@@ -1,6 +1,7 @@
 <!doctype html>
 <html>
 <head>
+  <link rel="shortcut icon" href="{{asset('assets/logo/tediu.png')}}" type="image/x-icon">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="{{asset('css/output.css')}}" rel="stylesheet">
@@ -16,17 +17,14 @@
             </a>
             <ul class="flex items-center gap-[30px] text-white">
                 <li>
-                    <a href="" class="font-semibold">Home</a>
-                </li>
-                <li>
                     <a href="{{route('front.pricing')}}" class="font-semibold">About</a>
                 </li>
+                @forelse($categories as $category)
                 <li>
-                    <a href="" class="font-semibold">Webinar</a>
+                    <a href="{{route('front.category', $category->slug)}}" class="font-semibold">{{$category->name}}</a>
                 </li>
-                <li>
-                    <a href="" class="font-semibold">Course</a>
-                </li>
+                @empty 
+                @endforelse
             </ul>
             @auth
             <div class="flex gap-[10px] items-center">
@@ -57,11 +55,11 @@
                    Menjadi teman UMKM, Besama UMKM, Maju Berdaya</p>
             </div>
             <div class="flex gap-6 w-fit">
-                <a href="" class="text-white font-semibold rounded-[30px] p-[16px_32px] bg-[#4B7BFF] transition-all duration-300 hover:shadow-[0_10px_20px_0_#D4379080]">Explore Courses</a>
-                <a href="" class="text-white font-semibold rounded-[30px] p-[16px_32px] ring-1 ring-white transition-all duration-300 hover:ring-2 hover:ring-[#4B7BFF]">About Us</a>
+                <a href="#category" class="text-white font-semibold rounded-[30px] p-[16px_32px] bg-[#4B7BFF] transition-all duration-300 hover:shadow-[0_10px_20px_0_#D4379080]">Explore Courses</a>
+                <a href="{{route('front.pricing')}}" class="text-white font-semibold rounded-[30px] p-[16px_32px] ring-1 ring-white transition-all duration-300 hover:ring-2 hover:ring-[#4B7BFF]">About</a>
             </div>
         </div>
-        <div class="flex gap-[70px] items-center justify-center">
+        {{-- <div class="flex gap-[70px] items-center justify-center">
             <div>
                 <img src="assets/icon/logo-55.svg" alt="icon">
             </div>
@@ -77,14 +75,11 @@
             <div>
                 <img src="assets/icon/logo-52.svg" alt="icon">
             </div>
-        </div>
+        </div> --}}
     </div>
-    <section id="Top-Categories" class="max-w-[1200px] mx-auto flex flex-col p-[70px_50px] gap-[30px]">
+    <section id="category" class="max-w-[1200px] mx-auto flex flex-col p-[70px_50px] gap-[30px]">
         <div class="flex flex-col gap-[30px]">
             <div class="gradient-badge w-fit p-[8px_16px] rounded-full border border-[#4B7BFF] flex items-center gap-[6px]">
-                <div>
-                    
-                </div>
                 <p class="font-medium text-sm text-white">About Us</p>
             </div>
             <div class="flex flex-col">

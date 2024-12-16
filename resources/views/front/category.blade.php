@@ -14,17 +14,14 @@
             </a>
             <ul class="flex items-center gap-[30px] text-white">
                 <li>
-                    <a href="{{route('front.index')}}" class="font-semibold">Home</a>
-                </li>
-                <li>
                     <a href="{{route('front.pricing')}}" class="font-semibold">About</a>
                 </li>
+                @forelse($categories as $category)
                 <li>
-                    <a href="" class="font-semibold">Webinar</a>
+                    <a href="{{route('front.category', $category->slug)}}" class="font-semibold">{{$category->name}}</a>
                 </li>
-                <li>
-                    <a href="" class="font-semibold">Course</a>
-                </li>
+                @empty 
+                @endforelse
             </ul>
             @auth
             <div class="flex gap-[10px] items-center">
@@ -117,7 +114,7 @@
                 <div>
                     <img src="{{asset('assets/icon/medal-star.svg')}}" alt="icon">
                 </div>
-                <p class="font-medium text-sm text-[#FF6129]">Zero to Success People</p>
+                <p class="font-medium text-sm text-[#4B7BFF]">Zero to Success People</p>
             </div>
             <div class="flex flex-col">
                 <h2 class="font-bold text-[40px] leading-[60px]">Happy & Success Students</h2>

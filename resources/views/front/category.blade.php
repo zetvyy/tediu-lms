@@ -13,9 +13,6 @@
                 <img src="{{asset('assets/logo/tediu-putih.png')}}" alt="logo" class="w-[150px]">
             </a>
             <ul class="flex items-center gap-[30px] text-white">
-                <li>
-                    <a href="{{route('front.pricing')}}" class="font-semibold">About</a>
-                </li>
                 @forelse($categories as $category)
                 <li>
                     <a href="{{route('front.category', $category->slug)}}" class="font-semibold">{{$category->name}}</a>
